@@ -18,7 +18,7 @@ export const Welcome = ({
       ref={ref}
       inert={disabled}
       className={cn(
-        'bg-background fixed inset-0 mx-auto flex h-svh flex-col items-center justify-center text-center',
+        'bg-gradient-to-br from-sky-100 via-white to-sky-50 fixed inset-0 mx-auto flex h-svh flex-col items-center justify-center text-center',
         disabled ? 'z-10' : 'z-20'
       )}
     >
@@ -37,24 +37,13 @@ export const Welcome = ({
       </svg>
 
       <p className="text-fg1 max-w-prose pt-1 leading-6 font-medium">
-        Chat live with your voice AI agent
+        Book an Appointment with the Voice AI agent
       </p>
       <Button variant="primary" size="lg" onClick={onStartCall} className="mt-6 w-64 font-mono">
         {startButtonText}
       </Button>
       <footer className="fixed bottom-5 left-0 z-20 flex w-full items-center justify-center">
-        <p className="text-fg1 max-w-prose pt-1 text-xs leading-5 font-normal text-pretty md:text-sm">
-          Need help getting set up? Check out the{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://docs.livekit.io/agents/start/voice-ai/"
-            className="underline"
-          >
-            Voice AI quickstart
-          </a>
-          .
-        </p>
+        © {new Date().getFullYear()} Eye Clinik Hospital — Thanks For Visiting ❤️
       </footer>
     </section>
   );

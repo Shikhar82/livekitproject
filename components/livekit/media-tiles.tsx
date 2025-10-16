@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo } from 'react';
 import { Track } from 'livekit-client';
 import { AnimatePresence, motion } from 'motion/react';
@@ -141,7 +142,7 @@ export function MediaTiles({ chatOpen }: MediaTilesProps) {
                 <MotionAgentTile
                   key="agent"
                   layoutId="agent"
-                  {...animationProps}
+                  {...(animationProps as any)}
                   animate={agentAnimate}
                   transition={agentLayoutTransition}
                   state={agentState}
@@ -154,7 +155,7 @@ export function MediaTiles({ chatOpen }: MediaTilesProps) {
                 <MotionAvatarTile
                   key="avatar"
                   layoutId="avatar"
-                  {...animationProps}
+                  {...(animationProps as any)}
                   animate={avatarAnimate}
                   transition={avatarLayoutTransition}
                   videoTrack={agentVideoTrack}
@@ -180,7 +181,7 @@ export function MediaTiles({ chatOpen }: MediaTilesProps) {
                   key="camera"
                   layout="position"
                   layoutId="camera"
-                  {...animationProps}
+                  {...(animationProps as any)}
                   trackRef={cameraTrack}
                   transition={{
                     ...animationProps.transition,
@@ -195,7 +196,7 @@ export function MediaTiles({ chatOpen }: MediaTilesProps) {
                   key="screen"
                   layout="position"
                   layoutId="screen"
-                  {...animationProps}
+                  {...(animationProps as any)}
                   trackRef={screenShareTrack}
                   transition={{
                     ...animationProps.transition,
