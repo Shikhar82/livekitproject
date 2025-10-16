@@ -18,7 +18,7 @@ export const Welcome = ({
       ref={ref}
       inert={disabled}
       className={cn(
-        'bg-gradient-to-br from-sky-100 via-white to-sky-50 fixed inset-0 mx-auto flex h-svh flex-col items-center justify-center text-center',
+        'bg-gradient-to-br from-sky-200 via-white to-sky-100 fixed inset-0 mx-auto flex h-svh flex-col items-center justify-center text-center',
         disabled ? 'z-10' : 'z-20'
       )}
     >
