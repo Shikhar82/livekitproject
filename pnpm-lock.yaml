@@ -48,7 +48,7 @@ importers:
         specifier: ^6.0.12
         version: 6.1.0
       livekit-client:
-        specifier: ^2.15.5
+        specifier: ^2.15.6
         version: 2.15.6(@types/dom-mediacapture-record@1.0.22)
       livekit-server-sdk:
         specifier: ^2.13.2

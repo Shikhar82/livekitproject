@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Image from "next/image";
 
 interface WelcomeProps {
   disabled: boolean;
@@ -14,14 +15,16 @@ export const Welcome = ({
   ref,
 }: React.ComponentProps<'div'> & WelcomeProps) => {
   return (
+    
     <section
       ref={ref}
       inert={disabled}
       className={cn(
-        'bg-gradient-to-br from-sky-200 via-white to-sky-100 fixed inset-0 mx-auto flex h-svh flex-col items-center justify-center text-center',
+        'relative flex items-center justify-between h-screen overflow-hidden bg-gradient-to-br from-sky-200 via-white to-sky-100 px-16',
         disabled ? 'z-10' : 'z-20'
       )}
     >
+      <div className='flex-1 flex flex-col items-center justify-center text-center z-10'> 
       <svg
         width="64"
         height="64"
@@ -35,13 +38,22 @@ export const Welcome = ({
           fill="currentColor"
         />
       </svg>
-
       <p className="text-fg1 max-w-prose pt-1 leading-6 font-medium">
         Book an Appointment with the Voice AI agent
       </p>
       <Button variant="primary" size="lg" onClick={onStartCall} className="mt-6 w-64 font-mono">
         {startButtonText}
       </Button>
+      </div>
+      <div className="flex-1 flex items-center justify-center relative">
+        <Image
+          src="/docters-home-page.png"
+          alt="Doctor Illustration"
+          width={600}
+          height={122}
+          className="rounded-2xl shadow-md"
+        />
+      </div>
       <footer className="fixed bottom-5 left-0 z-20 flex w-full items-center justify-center">
         © {new Date().getFullYear()} Eye Clinik Hospital — Thanks For Visiting ❤️
       </footer>

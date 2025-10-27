@@ -25,14 +25,20 @@ export default function Navbar({ onBook }: { onBook?: () => void }) {
 
         {/* Desktop Navigation */}
         <nav className="hidden sm:flex items-center space-x-6">
-          <Link href="/" className="px-3 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
             Home
           </Link>
-          <Link href="/services" className="px-3 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/services" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
             Services
           </Link>
-          <Link href="/doctors" className="px-3 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/doctors" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
             Doctors
+          </Link>
+          <Link href="/treatments" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
+           Treatments 
+          </Link>
+          <Link href="/contact-us" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
+           Contact Us 
           </Link>
         </nav>
 

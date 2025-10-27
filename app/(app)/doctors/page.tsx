@@ -1,7 +1,7 @@
 // app/doctors/page.tsx
 export default function DoctorsPage() {
   return (
-    <section className="min-h-screen pt-24 pb-16 bg-gradient-to-b from-white to-blue-50 text-center">
+    <section className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-sky-200 via-white to-sky-100 text-center">
       <h1 className="text-4xl font-bold text-cyan-600 mb-4">Our Doctors</h1>
       <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-10">
         Meet our experienced and compassionate team of eye specialists.
