@@ -24,7 +24,6 @@ export function App({ appConfig }: AppProps) {
   const { refreshConnectionDetails, existingOrRefreshConnectionDetails } =
     useConnectionDetails(appConfig);
 
-  // 🧩 Handle disconnect + media device errors
   useEffect(() => {
     const onDisconnected = () => {
       setSessionStarted(false);
@@ -44,7 +43,6 @@ export function App({ appConfig }: AppProps) {
     };
   }, [room, refreshConnectionDetails]);
 
-  // 🧩 Connect to LiveKit room once session starts
   useEffect(() => {
     let aborted = false;
     if (sessionStarted && room.state === 'disconnected') {
@@ -56,7 +54,15 @@ export function App({ appConfig }: AppProps) {
           room.connect(connectionDetails.serverUrl, connectionDetails.participantToken)
         ),
       ]).catch((error) => {
-        if (aborted) return;
+        if (aborted) {
+          // Once the effect has cleaned up after itself, drop any errors
+          //
+          // These errors are likely caused by this effect rerunning rapidly,
+          // resulting in a previous run `disconnect` running in parallel with
+          // a current run `connect`
+          return;
+        }
+
         toastAlert({
           title: 'There was an error connecting to the agent',
           description: `${error.name}: ${error.message}`,
@@ -72,44 +78,37 @@ export function App({ appConfig }: AppProps) {
   const { startButtonText } = appConfig;
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
-      {/* --- WELCOME SCREEN --- */}
-      {!sessionStarted && (
-        <MotionWelcome
-          key="welcome"
-          startButtonText={startButtonText}
-          onStartCall={() => setSessionStarted(true)}
-          disabled={sessionStarted}
-          initial={{ opacity: 1 }}
-          animate={{ opacity: sessionStarted ? 0 : 1 }}
-          transition={{ duration: 0.5, ease: 'linear' }}
-        />
-      )}
+    <main>
+      <MotionWelcome
+        key="welcome"
+        startButtonText={startButtonText}
+        onStartCall={() => setSessionStarted(true)}
+        disabled={sessionStarted}
+        initial={{ opacity: 1 }}
+        animate={{ opacity: sessionStarted ? 0 : 1 }}
+        transition={{ duration: 0.5, ease: 'linear', delay: sessionStarted ? 0 : 0.5 }}
+      />
 
-      {/* --- SESSION VIEW --- */}
       <RoomContext.Provider value={room}>
         <RoomAudioRenderer />
         <StartAudio label="Start Audio" />
-
-        {sessionStarted && (
-          <MotionSessionView
-            key="session-view"
-            appConfig={appConfig}
-            disabled={!sessionStarted}
-            sessionStarted={sessionStarted}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: sessionStarted ? 1 : 0 }}
-            transition={{
-              duration: 0.5,
-              ease: 'linear',
-              delay: sessionStarted ? 0.2 : 0,
-            }}
-          />
-        )}
+        {/* --- */}
+        <MotionSessionView
+          key="session-view"
+          appConfig={appConfig}
+          disabled={!sessionStarted}
+          sessionStarted={sessionStarted}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: sessionStarted ? 1 : 0 }}
+          transition={{
+            duration: 0.5,
+            ease: 'linear',
+            delay: sessionStarted ? 0.5 : 0,
+          }}
+        />
       </RoomContext.Provider>
 
       <Toaster />
     </main>
   );
 }
-

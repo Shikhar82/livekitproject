@@ -3,11 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
-
 
 :root {
   --fg0: #000000;

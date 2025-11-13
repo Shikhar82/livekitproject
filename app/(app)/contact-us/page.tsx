@@ -1,27 +1,27 @@
 export default function ContactUs() {
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-sky-50 via-white to-sky-100 py-20 px-6 flex flex-col items-center">
-      <div className="max-w-6xl w-full text-center">
-        <h1 className="text-5xl font-bold text-sky-800 mb-4">Contact Us</h1>
-        <p className="text-gray-700 text-lg mb-16 max-w-2xl mx-auto">
-          Have a question or need to book an appointment? We're always ready to help.  
-          Reach out through the details below or send us a message directly.
+    <section className="relative flex min-h-screen flex-col items-center bg-gradient-to-b from-sky-50 via-white to-sky-100 px-6 py-20">
+      <div className="w-full max-w-6xl text-center">
+        <h1 className="mb-4 text-5xl font-bold text-sky-800">Contact Us</h1>
+        <p className="mx-auto mb-16 max-w-2xl text-lg text-gray-700">
+          Have a question or need to book an appointment? We're always ready to help. Reach out
+          through the details below or send us a message directly.
         </p>
 
         {/* Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-          <div className="bg-white rounded-2xl shadow-md p-10 border border-sky-100 hover:shadow-lg transition">
-            <h2 className="text-2xl font-semibold text-sky-700 mb-3">Clinic Address</h2>
-            <p className="text-gray-600 leading-relaxed">
+        <div className="mb-16 grid grid-cols-1 gap-10 md:grid-cols-2">
+          <div className="rounded-2xl border border-sky-100 bg-white p-10 shadow-md transition hover:shadow-lg">
+            <h2 className="mb-3 text-2xl font-semibold text-sky-700">Clinic Address</h2>
+            <p className="leading-relaxed text-gray-600">
               Smart Eye Clinic Hospital <br />
               123 Vision Avenue, City Center, <br />
               New Delhi, India 110001
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-md p-10 border border-sky-100 hover:shadow-lg transition">
-            <h2 className="text-2xl font-semibold text-sky-700 mb-3">Contact Details</h2>
-            <p className="text-gray-600 leading-relaxed">
+          <div className="rounded-2xl border border-sky-100 bg-white p-10 shadow-md transition hover:shadow-lg">
+            <h2 className="mb-3 text-2xl font-semibold text-sky-700">Contact Details</h2>
+            <p className="leading-relaxed text-gray-600">
               📞 +91 98765 43210 <br />
               ✉️ info@smarteyeclinic.com
             </p>
@@ -29,28 +29,28 @@ export default function ContactUs() {
         </div>
 
         {/* Message Form */}
-        <div className="bg-white rounded-2xl shadow-lg border border-sky-100 p-12 max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold text-sky-700 mb-8">Send a Message</h2>
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+        <div className="mx-auto max-w-4xl rounded-2xl border border-sky-100 bg-white p-12 shadow-lg">
+          <h2 className="mb-8 text-3xl font-semibold text-sky-700">Send a Message</h2>
+          <form className="grid grid-cols-1 gap-6 text-left md:grid-cols-2">
             <input
               type="text"
               placeholder="Your Name"
-              className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-sky-400 col-span-1"
+              className="col-span-1 rounded-lg border border-gray-300 p-4 focus:ring-2 focus:ring-sky-400 focus:outline-none"
             />
             <input
               type="email"
               placeholder="Your Email"
-              className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-sky-400 col-span-1"
+              className="col-span-1 rounded-lg border border-gray-300 p-4 focus:ring-2 focus:ring-sky-400 focus:outline-none"
             />
             <textarea
               placeholder="Your Message"
               rows={5}
-              className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-sky-400 md:col-span-2"
+              className="rounded-lg border border-gray-300 p-4 focus:ring-2 focus:ring-sky-400 focus:outline-none md:col-span-2"
             />
-            <div className="md:col-span-2 flex justify-center">
+            <div className="flex justify-center md:col-span-2">
               <button
                 type="submit"
-                className="bg-sky-600 text-white py-3 px-8 rounded-lg font-medium hover:bg-sky-700 transition-all"
+                className="rounded-lg bg-sky-600 px-8 py-3 font-medium text-white transition-all hover:bg-sky-700"
               >
                 Send Message
               </button>

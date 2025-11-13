@@ -1,7 +1,9 @@
+import { useState } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import Image from "next/image";
-
+import { ClipboardClock } from "lucide-react";
+import { BotMessageSquare } from "lucide-react";
 interface WelcomeProps {
   disabled: boolean;
   startButtonText: string;
@@ -14,47 +16,214 @@ export const Welcome = ({
   onStartCall,
   ref,
 }: React.ComponentProps<'div'> & WelcomeProps) => {
+  const [showForm, setShowForm] = useState(false);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch('http://localhost:5000/api/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        alert('✅ Appointment saved successfully!');
+        e.currentTarget.reset();
+      } else {
+        alert('❌ Failed to save appointment');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
-    
     <section
       ref={ref}
       inert={disabled}
       className={cn(
-        'relative flex items-center justify-between h-screen overflow-hidden bg-gradient-to-br from-sky-200 via-white to-sky-100 px-16',
+        'relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-sky-100 via-white to-sky-200 px-4 brightness-100 sm:px-8 md:flex-row md:px-16',
         disabled ? 'z-10' : 'z-20'
       )}
     >
-      <div className='flex-1 flex flex-col items-center justify-center text-center z-10'> 
-      <svg
-        width="64"
-        height="64"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="text-fg0 mb-4 size-16"
-      >
-        <path
-          d="M15 24V40C15 40.7957 14.6839 41.5587 14.1213 42.1213C13.5587 42.6839 12.7956 43 12 43C11.2044 43 10.4413 42.6839 9.87868 42.1213C9.31607 41.5587 9 40.7957 9 40V24C9 23.2044 9.31607 22.4413 9.87868 21.8787C10.4413 21.3161 11.2044 21 12 21C12.7956 21 13.5587 21.3161 14.1213 21.8787C14.6839 22.4413 15 23.2044 15 24ZM22 5C21.2044 5 20.4413 5.31607 19.8787 5.87868C19.3161 6.44129 19 7.20435 19 8V56C19 56.7957 19.3161 57.5587 19.8787 58.1213C20.4413 58.6839 21.2044 59 22 59C22.7956 59 23.5587 58.6839 24.1213 58.1213C24.6839 57.5587 25 56.7957 25 56V8C25 7.20435 24.6839 6.44129 24.1213 5.87868C23.5587 5.31607 22.7956 5 22 5ZM32 13C31.2044 13 30.4413 13.3161 29.8787 13.8787C29.3161 14.4413 29 15.2044 29 16V48C29 48.7957 29.3161 49.5587 29.8787 50.1213C30.4413 50.6839 31.2044 51 32 51C32.7956 51 33.5587 50.6839 34.1213 50.1213C34.6839 49.5587 35 48.7957 35 48V16C35 15.2044 34.6839 14.4413 34.1213 13.8787C33.5587 13.3161 32.7956 13 32 13ZM42 21C41.2043 21 40.4413 21.3161 39.8787 21.8787C39.3161 22.4413 39 23.2044 39 24V40C39 40.7957 39.3161 41.5587 39.8787 42.1213C40.4413 42.6839 41.2043 43 42 43C42.7957 43 43.5587 42.6839 44.1213 42.1213C44.6839 41.5587 45 40.7957 45 40V24C45 23.2044 44.6839 22.4413 44.1213 21.8787C43.5587 21.3161 42.7957 21 42 21ZM52 17C51.2043 17 50.4413 17.3161 49.8787 17.8787C49.3161 18.4413 49 19.2044 49 20V44C49 44.7957 49.3161 45.5587 49.8787 46.1213C50.4413 46.6839 51.2043 47 52 47C52.7957 47 53.5587 46.6839 54.1213 46.1213C54.6839 45.5587 55 44.7957 55 44V20C55 19.2044 54.6839 18.4413 54.1213 17.8787C53.5587 17.3161 52.7957 17 52 17Z"
-          fill="currentColor"
-        />
-      </svg>
-      <p className="text-fg1 max-w-prose pt-1 leading-6 font-medium">
-        Book an Appointment with the Voice AI agent
-      </p>
-      <Button variant="primary" size="lg" onClick={onStartCall} className="mt-6 w-64 font-mono">
-        {startButtonText}
-      </Button>
+      {/* 🔘 Toggle Form Button */}
+      <div className="absolute top-30 left-1/2 z-50 flex h-25 w-80 -translate-x-1/2 flex-col items-center justify-center bg-transparent text-sm font-semibold text-white transition-all duration-300 md:top-40 md:left-5 md:w-[600px] md:translate-x-0">
+  <button
+    onClick={() => setShowForm(!showForm)}
+    className="h-10 w-60 rounded-full bg-red-600 text-sm font-semibold text-white hover:bg-red-700 flex items-center justify-center gap-2"
+  >
+    {showForm ? (
+      'Close Form'
+    ) : (
+      <>
+      <ClipboardClock size={16} color="#ffffff" strokeWidth={3} />
+        Book Appointment Yourself
+      </>
+    )}
+  </button>
+
+
+
+          <p className="text-fg1 mt-2 w-full self-stretch pt-1 text-center leading-6 font-medium">
+            Manually select your doctor, date, and time in just a few clicks.
+          </p>
+    
       </div>
-      <div className="flex-1 flex items-center justify-center relative">
+
+      {/* 🗣️ Voice AI Button */}
+      {!showForm && (
+      <div className="absolute bottom-20 left-1/2 z-50 flex h-25 w-80 -translate-x-1/2 flex-col items-center justify-center bg-transparent text-sm font-semibold text-white transition-all duration-300 md:top-60 md:left-5 md:w-[600px] md:translate-x-0">
+  <Button
+    variant="primary"
+    size="lg"
+    onClick={() => {
+      onStartCall(); // existing logic
+      setShowForm(true); // also show the form
+    }}
+    className="mt-2 w-70 font-mono flex items-center justify-center gap-2"
+  >
+    <BotMessageSquare size={16} color="#f5d714" strokeWidth={3} />
+    {startButtonText}
+  </Button>
+
+  <p className="text-fg1 mt-2 w-full self-stretch pt-1 text-center leading-6 font-medium">
+    Let our AI agent handle your query or booking through a simple voice conversation.
+  </p>
+</div>
+
+      )}
+
+      {/* 🧾 Appointment Form */}
+      {showForm && (
+        <div className="absolute top-48 left-1/2 z-40 w-full max-w-sm -translate-x-1/2 p-6 opacity-100 transition-opacity duration-300 sm:p-8 md:top-1/3 md:left-50 md:mt-[5px] md:ml-[90px] md:w-[600px] md:translate-x-0">
+          <form
+            className="w-full space-y-6 rounded-2xl bg-white p-6 shadow-lg md:p-8"
+            onSubmit={handleSubmit}
+          >
+            {/* Row 1: Full Name + Phone Number */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Full Name */}
+              <div className="group relative z-0 w-full">
+                <input
+                  type="text"
+                  name="full_name"
+                  id="full_name"
+                  className="peer left-0 block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 text-left text-sm text-gray-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="full_name"
+                  className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-left text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600"
+                >
+                  Full Name
+                </label>
+              </div>
+
+              {/* Phone Number */}
+              <div className="group relative z-0 w-full">
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  pattern="[0-9]{10}"
+                  className="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 text-sm text-gray-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="phone"
+                  className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-left text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600"
+                >
+                  Phone Number
+                </label>
+              </div>
+            </div>
+
+            {/* Row 2: Date + Time */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Date */}
+              <div className="group relative z-0 w-full">
+                <input
+                  type="date"
+                  name="appointment_date"
+                  id="appointment_date"
+                  className="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 text-sm text-gray-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="appointment_date"
+                  className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-left text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600"
+                >
+                  Date
+                </label>
+              </div>
+
+              {/* Time */}
+              <div className="group relative z-0 w-full">
+                <input
+                  type="time"
+                  name="appointment_time"
+                  id="appointment_time"
+                  className="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 text-sm text-gray-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="appointment_time"
+                  className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-left text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600"
+                >
+                  Time
+                </label>
+              </div>
+            </div>
+
+            {/* Reason for Visiting */}
+            <div className="group relative z-0 w-full">
+              <textarea
+                name="reason"
+                id="reason"
+                className="peer left-0 block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 text-left text-sm text-gray-900 focus:border-blue-600 focus:ring-0 focus:outline-none"
+                placeholder=" "
+                required
+              ></textarea>
+              <label
+                htmlFor="reason"
+                className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-left text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600"
+              >
+                Reason for Visiting
+              </label>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* 👩‍⚕️ Image */}
+      <div className="relative flex flex-1 items-center justify-center pt-10 md:ml-[500px]">
         <Image
           src="/docters-home-page.png"
           alt="Doctor Illustration"
           width={600}
           height={122}
-          className="rounded-2xl shadow-md"
+          className="rounded-2xl opacity-80 shadow-md"
         />
       </div>
-      <footer className="fixed bottom-5 left-0 z-20 flex w-full items-center justify-center">
+
+      {/* ⚓ Footer */}
+      <footer className="fixed bottom-5 left-0 z-20 flex w-full items-center justify-center text-sm text-gray-600">
         © {new Date().getFullYear()} Eye Clinik Hospital — Thanks For Visiting ❤️
       </footer>
     </section>

@@ -25,21 +25,24 @@ export default function Navbar({ onBook }: { onBook?: () => void }) {
 
         {/* Desktop Navigation */}
         <nav className="hidden sm:flex items-center space-x-6">
-          <Link href="/" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/" className="px-10 py-2 rounded-md hover:bg-slate-100 transition">
             Home
           </Link>
-          <Link href="/services" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/services" className="px-10 py-2 rounded-md hover:bg-slate-100 transition">
             Services
           </Link>
-          <Link href="/doctors" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/doctors" className="px-10 py-2 rounded-md hover:bg-slate-100 transition">
             Doctors
           </Link>
-          <Link href="/treatments" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/treatments" className="px-10 py-2 rounded-md hover:bg-slate-100 transition">
            Treatments 
           </Link>
-          <Link href="/contact-us" className="px-15 py-2 rounded-md hover:bg-slate-100 transition">
+          <Link href="/contact-us" className="px-10 py-2 rounded-md hover:bg-slate-100 transition">
            Contact Us 
           </Link>
+         <Link href="/appointments" className="px-10 py-2 rounded-md hover:bg-slate-100 transition">
+         Appointments
+         </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -57,15 +60,18 @@ export default function Navbar({ onBook }: { onBook?: () => void }) {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="sm:hidden bg-white/90 backdrop-blur-md border-t py-3 space-y-2 text-center shadow-sm">
-          <Link href="/" className="block w-full px-4 py-2 hover:bg-slate-100" onClick={() => setMenuOpen(false)}>
+        <div className="sm:hidden bg-red-600 backdrop-blur-md border-t py-3 space-y-2 text-center shadow-sm">
+          <Link href="/" className="block w-full text-white px-4 py-2 hover:bg-slate-100" onClick={() => setMenuOpen(false)}>
             Home
           </Link>
-          <Link href="/services" className="block w-full px-4 py-2 hover:bg-slate-100" onClick={() => setMenuOpen(false)}>
+          <Link href="/services" className="block text-white w-full px-4 py-2 hover:bg-slate-100" onClick={() => setMenuOpen(false)}>
             Services
           </Link>
-          <Link href="/doctors" className="block w-full px-4 py-2 hover:bg-slate-100" onClick={() => setMenuOpen(false)}>
+          <Link href="/doctors" className="block text-white w-full px-4 py-2 hover:bg-slate-100" onClick={() => setMenuOpen(false)}>
             Doctors
+          </Link>
+          <Link href="/appointments" className="px-10 py-2 text-white rounded-md hover:bg-slate-100 transition">
+            Appointments
           </Link>
         </div>
       )}

@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 import { getAppConfig } from '@/lib/utils';
-import Navbar from "../components/Navbar";
+import Navbar from '../components/Navbar';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export default async function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <>
-       <Navbar />
+      <Navbar />
       {children}
     </>
   );
