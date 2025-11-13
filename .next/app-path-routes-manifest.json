@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/api/connection-details/route": "/api/connection-details",
+  "/(app)/opengraph-image-xg4ifa/route": "/opengraph-image-xg4ifa",
+  "/(app)/contact-us/page": "/contact-us",
+  "/(app)/doctors/page": "/doctors",
+  "/(app)/services/page": "/services",
+  "/(app)/treatments/page": "/treatments",
+  "/(app)/page": "/",
+  "/(app)/appointments/page": "/appointments",
+  "/components/base/page": "/components/base",
+  "/components/livekit/page": "/components/livekit",
+  "/components/page": "/components"
+}

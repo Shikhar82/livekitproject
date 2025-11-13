@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/connection-details/route": "app/api/connection-details/route.js",
+  "/(app)/opengraph-image-xg4ifa/route": "app/(app)/opengraph-image-xg4ifa/route.js",
+  "/(app)/contact-us/page": "app/(app)/contact-us/page.js",
+  "/(app)/doctors/page": "app/(app)/doctors/page.js",
+  "/(app)/services/page": "app/(app)/services/page.js",
+  "/(app)/treatments/page": "app/(app)/treatments/page.js",
+  "/(app)/page": "app/(app)/page.js",
+  "/(app)/appointments/page": "app/(app)/appointments/page.js",
+  "/components/base/page": "app/components/base/page.js",
+  "/components/livekit/page": "app/components/livekit/page.js",
+  "/components/page": "app/components/page.js"
+}
